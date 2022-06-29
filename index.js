@@ -66,15 +66,22 @@ let before = document.getElementById("before");
 let after = document.getElementById("after");
 let i = 0;
 
-after.addEventListener("click", () => {
+function changeImg(control) {
     let currentImg = document.querySelector(".visible");
     currentImg.classList.remove("visible");
     currentImg.classList.add("d-none");
-    i++;
-    if (i > arrImg.length - 1) {
-        i = 0;
-    }
 
+    if (control === true) {
+        i++;
+        if (i > arrImg.length - 1) {
+            i = 0;
+        }
+    } else {
+        i--;
+        if (i < 0) {
+            i = arrImg.length - 1;
+        }
+    }
     let visibleImg = arrImg[i];
     visibleImg.classList.remove("d-none");
     visibleImg.classList.add("visible");
@@ -84,26 +91,14 @@ after.addEventListener("click", () => {
     textImg.append(titleImg);
     text.innerHTML = images[i].description;
     textImg.append(text);
+}
+
+after.addEventListener("click", () => {
+    changeImg(true);
 });
 
 before.addEventListener("click", () => {
-    let currentImg = document.querySelector(".visible");
-    currentImg.classList.remove("visible");
-    currentImg.classList.add("d-none");
-    i--;
-    if (i < 0) {
-        i = arrImg.length - 1;
-    }
-
-    let visibleImg = arrImg[i];
-    visibleImg.classList.remove("d-none");
-    visibleImg.classList.add("visible");
-
-    textImg.innerHTML = "";
-    titleImg.innerHTML = images[i].title;
-    textImg.append(titleImg);
-    text.innerHTML = images[i].description;
-    textImg.append(text);
+    changeImg(false);
 });
 
 
@@ -120,9 +115,54 @@ thumbnailImgs.forEach((Element, index, Array) => {
         visibleImg.classList.add("visible");
 
         textImg.innerHTML = "";
-        titleImg.innerHTML = images[i].title;
+        titleImg.innerHTML = images[index].title;
         textImg.append(titleImg);
-        text.innerHTML = images[i].description;
+        text.innerHTML = images[index].description;
         textImg.append(text);
-    })
+        i = index;
+    });
+});
+
+
+
+
+let control = true;
+let afterInterval;
+let beforInterval;
+
+function interval(control) {
+    if (control) {
+        afterInterval = setInterval(() => {
+            changeImg(true);
+        }, 3000);
+    } else {
+        beforInterval = setInterval(() => {
+            changeImg(false);
+        }, 3000);
+    }
+}
+
+interval(control);
+
+let stopButton = document.getElementById("stop");
+stopButton.addEventListener("click", () => {
+    console.log(control);
+    if (control) {
+        clearInterval(afterInterval);
+    }else{
+        clearInterval(beforInterval);
+    }
+});
+
+let reverseButton = document.getElementById("reverse");
+reverseButton.addEventListener("click", () => {
+    if (control) {
+        stopButton.click();
+        control = false;
+        interval(control);
+    } else{
+        stopButton.click();
+        control = true;
+        interval(control);
+    }
 });
