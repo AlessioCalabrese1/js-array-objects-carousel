@@ -1,0 +1,38 @@
+.carousel-container{
+    height: 800px;
+    width: 1000px;
+    border: 1px solid black;
+    margin: 20px auto;
+}
+
+.visible{
+    display: inline-block;
+    height: 100%;
+}
+
+#container-visible-img{
+    height: 665px;
+    position: relative;
+}
+
+#text_img{
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: end;
+    color: white;
+}
+
+#container-thumbnail{
+    height: 135px;
+}
+
+.thumbnail-img{
+    width: 20%;
+    height: 100%;
+}
+
+#container-button{
+    width: 30%;
+    margin: 0 auto;
+}
