@@ -45,7 +45,7 @@ images.forEach((Element, index, Array) => {
     img.classList.add("img-fluid");
     if (index === 0) {
         img.classList.add("visible");
-    
+
         titleImg.innerHTML = Element.title;
         textImg.append(titleImg);
 
@@ -71,8 +71,7 @@ after.addEventListener("click", () => {
     currentImg.classList.remove("visible");
     currentImg.classList.add("d-none");
     i++;
-    if(i > arrImg.length - 1)
-    {
+    if (i > arrImg.length - 1) {
         i = 0;
     }
 
@@ -83,7 +82,7 @@ after.addEventListener("click", () => {
     textImg.innerHTML = "";
     titleImg.innerHTML = images[i].title;
     textImg.append(titleImg);
-    text.innerHTML = images[i].description; 
+    text.innerHTML = images[i].description;
     textImg.append(text);
 });
 
@@ -92,19 +91,38 @@ before.addEventListener("click", () => {
     currentImg.classList.remove("visible");
     currentImg.classList.add("d-none");
     i--;
-    if(i < 0)
-    {
+    if (i < 0) {
         i = arrImg.length - 1;
     }
 
     let visibleImg = arrImg[i];
-    console.log(arrImg[1]);
     visibleImg.classList.remove("d-none");
     visibleImg.classList.add("visible");
 
     textImg.innerHTML = "";
     titleImg.innerHTML = images[i].title;
     textImg.append(titleImg);
-    text.innerHTML = images[i].description; 
+    text.innerHTML = images[i].description;
     textImg.append(text);
+});
+
+
+let thumbnailImgs = document.querySelectorAll("#container-thumbnail img");
+
+thumbnailImgs.forEach((Element, index, Array) => {
+    Element.addEventListener("click", () => {
+        let currentImg = document.querySelector(".visible");
+        currentImg.classList.remove("visible");
+        currentImg.classList.add("d-none");
+
+        let visibleImg = arrImg[index];
+        visibleImg.classList.remove("d-none");
+        visibleImg.classList.add("visible");
+
+        textImg.innerHTML = "";
+        titleImg.innerHTML = images[i].title;
+        textImg.append(titleImg);
+        text.innerHTML = images[i].description;
+        textImg.append(text);
+    })
 });
