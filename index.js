@@ -40,11 +40,13 @@ images.forEach((Element, index, Array) => {
     let thumbnail = document.createElement("img");
 
     thumbnail.setAttribute("src", Element.url);
-    thumbnail.classList.add("thumbnail-img", "thumbnail-visible");
+    thumbnail.classList.add("thumbnail-img");
     img.setAttribute("src", Element.url);
     img.classList.add("img-fluid");
     if (index === 0) {
         img.classList.add("visible");
+
+        thumbnail.classList.add("thumbnail-visible");
 
         titleImg.innerHTML = Element.title;
         textImg.append(titleImg);
@@ -91,6 +93,8 @@ function changeImg(control) {
     textImg.append(titleImg);
     text.innerHTML = images[i].description;
     textImg.append(text);
+    removeThumbnailHover();
+    addThumbnailHover(i);
 }
 
 after.addEventListener("click", () => {
@@ -119,14 +123,20 @@ thumbnailImgs.forEach((Element, index, Array) => {
         textImg.append(titleImg);
         text.innerHTML = images[index].description;
         textImg.append(text);
-        removeThumbnailHover()
+        removeThumbnailHover();
+        addThumbnailHover(index);
         i = index;
     });
 });
 
 function removeThumbnailHover() {
-    let Thover = document.querySelectorAll("#container-thumbnail img.thumbnail-visible")
+    let Thover = document.querySelector(".thumbnail-visible")
     Thover.classList.remove("thumbnail-visible")
+}
+
+function addThumbnailHover(index) {
+    let thumbnailVisible =  thumbnailImgs[index];
+    thumbnailVisible.classList.add("thumbnail-visible")
 }
 
 
