@@ -31,7 +31,7 @@ const images = [
 let contImgVisible = document.getElementById("container-visible-img");
 let contThumbnail = document.getElementById("container-thumbnail");
 
-let titleImg = document.createElement("h4");
+let titleImg = document.createElement("h3");
 let text = document.createElement("div");
 let textImg = document.getElementById("text_img");
 
@@ -40,7 +40,7 @@ images.forEach((Element, index, Array) => {
     let thumbnail = document.createElement("img");
 
     thumbnail.setAttribute("src", Element.url);
-    thumbnail.classList.add("thumbnail-img");
+    thumbnail.classList.add("thumbnail-img", "thumbnail-visible");
     img.setAttribute("src", Element.url);
     img.classList.add("img-fluid");
     if (index === 0) {
@@ -71,7 +71,7 @@ function changeImg(control) {
     currentImg.classList.remove("visible");
     currentImg.classList.add("d-none");
 
-    if (control === true) {
+    if (control) {
         i++;
         if (i > arrImg.length - 1) {
             i = 0;
@@ -119,9 +119,15 @@ thumbnailImgs.forEach((Element, index, Array) => {
         textImg.append(titleImg);
         text.innerHTML = images[index].description;
         textImg.append(text);
+        removeThumbnailHover()
         i = index;
     });
 });
+
+function removeThumbnailHover() {
+    let Thover = document.querySelectorAll("#container-thumbnail img.thumbnail-visible")
+    Thover.classList.remove("thumbnail-visible")
+}
 
 
 
